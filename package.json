@@ -6,22 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ley-new": "f(){ touch migrations/$(date +%s)-$1.ts; }; f",
+    "migrate": "ley --require tsm"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
+    "ley": "^0.8.1",
+    "next": "14.0.4",
+    "postgres": "^3.4.3",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.4"
+    "tsm": "^2.3.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "typescript": "^5"
   }
 }
