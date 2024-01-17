@@ -35,10 +35,21 @@ export const getMessageById = cache(async (id: number) => {
 export const createMessage = cache(
   async (messageText: string, chatUser: string) => {
     const [message] = await sql<Message[]>`
-  INSERT INTO messages
-  (message_text, chat_user)
-  VALUES (${messageText}, ${chatUser})
-  RETURNING id, message_text, chat_user
+    INSERT INTO messages
+    (message_text, chat_user)
+    VALUES (${messageText}, ${chatUser})
+    RETURNING id, message_text, chat_user
   `;
+    return message;
   },
 );
+
+// DELETE messages
+
+export const deleteMessages = cache(async (id: number) => {
+  const [message] = await sql<{ id: number }[]>`
+    DELETE from messages WHERE messages.id = ${id}
+    RETURNING id
+    `;
+  return message;
+});
