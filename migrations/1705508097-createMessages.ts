@@ -6,7 +6,7 @@ export async function up(sql: Sql) {
   await sql`
   CREATE TABLE messages (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    messageText varchar NOT NULL,
+    message_text varchar NOT NULL,
     chat_user varchar NOT NULL
   )
   `;

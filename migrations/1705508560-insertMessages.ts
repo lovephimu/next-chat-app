@@ -31,7 +31,7 @@ export async function up(sql: Sql) {
   for (const message of messages) {
     await sql`
     INSERT INTO messages
-    (messageText, chat_user)
+    (message_text, chat_user)
     VALUES
     (${message.messageText}, ${message.chat_user})
     `;
