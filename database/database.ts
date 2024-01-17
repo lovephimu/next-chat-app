@@ -9,6 +9,10 @@ export type Message = {
   chat_user: string;
 };
 
+export type Error = {
+  error: string;
+};
+
 // GET messages
 
 export const getMessages = cache(async () => {
@@ -16,6 +20,14 @@ export const getMessages = cache(async () => {
   SELECT * FROM messages
   `;
   return messages;
+});
+
+export const getMessageById = cache(async (id: number) => {
+  const [message] = await sql<Message[]>`
+  SELECT * FROM messages
+  WHERE id = ${id}
+  `;
+  return message;
 });
 
 // POST messages
