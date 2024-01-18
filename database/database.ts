@@ -38,15 +38,15 @@ export const createMessage = cache(
     INSERT INTO messages
     (message_text, chat_user)
     VALUES (${messageText}, ${chatUser})
-    RETURNING id, message_text, chat_user
+    RETURNING *
   `;
     return message;
   },
 );
-
+//id, message_text, chat_user
 // DELETE messages
 
-export const deleteMessages = cache(async (id: number) => {
+export const deleteMessagesById = cache(async (id: number) => {
   const [message] = await sql<{ id: number }[]>`
     DELETE from messages WHERE messages.id = ${id}
     RETURNING id

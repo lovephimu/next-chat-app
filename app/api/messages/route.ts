@@ -1,9 +1,11 @@
 import {
   createMessage,
+  deleteMessagesById,
   Error,
   getMessages,
   Message,
 } from '@/database/database';
+import { getOldMessageIds } from '@/util/functions/getOldMessageIds';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -27,6 +29,7 @@ export async function POST(
 ): Promise<NextResponse<MessageResponseBodyPost>> {
   const body = await request.json();
 
+  // 1. Gather user input
   // zod tests to check if body matches schema
 
   const result = messageSchema.safeParse(body);
@@ -40,6 +43,24 @@ export async function POST(
       { status: 400 },
     );
   }
+
+  // 2. Check database, see how many messages there are
+
+  const messages = await getMessages();
+
+  // 3. Check if there are more than 5 messages (messageLimit) , if so delete the oldest
+
+  const messageLimit = 5;
+
+  if (messages?.length >= messageLimit) {
+    const oldMessageIds = getOldMessageIds(messageLimit, messages);
+
+    await Promise.all(
+      oldMessageIds.map(async (oldId) => deleteMessagesById(oldId)),
+    );
+  }
+
+  // 4. Save new message
 
   const message = await createMessage(
     result.data.messageText,
