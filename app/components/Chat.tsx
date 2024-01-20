@@ -31,7 +31,15 @@ export default function Chat() {
 
     // const data = await response.json();
 
-    // setAnimalList([...animalList, data.animal]);
+    setNewMessage('');
+  }
+
+  // UX functions
+
+  function handleKeyDown(event: React.KeyboardEvent) {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
   }
 
   // UseEffects
@@ -42,20 +50,30 @@ export default function Chat() {
 
   return (
     <section>
-      <div>chat messages</div>
+      {/* Chat messages */}
+
       <div>
         {messages.map((message) => {
           return <p key={`${message.id}`}>{message.messageText}</p>;
         })}
       </div>
-      <input
-        type="text"
-        onChange={(event) => {
-          setNewMessage(event.currentTarget.value);
-        }}
-      ></input>
-      <div>
-        <button onClick={async () => await sendMessage()}>Send</button>
+
+      {/* Inputs */}
+
+      <div className="flex justify-between mt-4">
+        <input
+          className="bg-transparent border border-primaryPink focus:border-primaryPink focus:ring-0 p-4"
+          type="text"
+          autoFocus
+          onChange={(event) => {
+            setNewMessage(event.currentTarget.value);
+          }}
+          onKeyDown={(event) => handleKeyDown(event)}
+          value={newMessage}
+        ></input>
+        <div>
+          <button onClick={async () => await sendMessage()}>Send</button>
+        </div>
       </div>
     </section>
   );
