@@ -7,6 +7,7 @@ export default function Chat() {
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
+  const [update, setUpdate] = useState();
 
   // Fetch functions to read and write Messages
 

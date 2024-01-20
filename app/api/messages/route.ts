@@ -7,10 +7,13 @@ import {
 } from '@/database/database';
 import { getOldMessageIds } from '@/util/functions/getOldMessageIds';
 import { NextRequest, NextResponse } from 'next/server';
+import Pusher from 'pusher';
 import { z } from 'zod';
 
 type MessageResponseBodyGet = { messages: Message[] } | Error;
 type MessageResponseBodyPost = { message: Message } | Error;
+
+// Schema for checking content
 
 const messageSchema = z.object({
   messageText: z.string(),
@@ -27,6 +30,29 @@ export async function GET(
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<MessageResponseBodyPost>> {
+  // Ensure that environment variables are defined
+  const appId = process.env.PUSHER_APP_ID;
+  const key = process.env.PUSHER_KEY;
+  const secret = process.env.PUSHER_SECRET;
+  const cluster = process.env.PUSHER_CLUSTER;
+
+  if (!appId || !key || !secret || !cluster) {
+    return NextResponse.json(
+      {
+        error: 'Pusher environment variables are not properly set.',
+      },
+      { status: 400 },
+    );
+  }
+
+  const pusher = new Pusher({
+    appId: appId,
+    key: key,
+    secret: secret,
+    cluster: cluster,
+    useTLS: true,
+  });
+
   const body = await request.json();
 
   // 1. Gather user input
@@ -75,6 +101,11 @@ export async function POST(
       { status: 500 },
     );
   }
+
+  // Trigger Pusher event (new)
+  await pusher.trigger('earthy-dawn-65', 'new-message', {
+    message: message,
+  });
 
   return NextResponse.json({
     message: message,

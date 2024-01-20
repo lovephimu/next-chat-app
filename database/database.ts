@@ -18,6 +18,7 @@ export type Error = {
 export const getMessages = cache(async () => {
   const messages = await sql<Message[]>`
   SELECT * FROM messages
+  ORDER BY id ASC
   `;
   return messages;
 });
