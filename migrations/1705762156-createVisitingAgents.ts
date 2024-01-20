@@ -4,16 +4,15 @@ import { Sql } from 'postgres';
 
 export async function up(sql: Sql) {
   await sql`
-  CREATE TABLE messages (
+  CREATE TABLE visiting_agents (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    message_text varchar(280) NOT NULL,
-    chat_user varchar(140) NOT NULL
+    agent_name varchar(120) NOT NULL
   )
   `;
 }
 
 export async function down(sql: Sql) {
   await sql`
-  DROP TABLE messages
+  DROP TABLE visiting_agents
   `;
 }
