@@ -6,7 +6,7 @@ import { sql } from './connect';
 export type Message = {
   id: number;
   messageText: string;
-  chat_user: string;
+  chatUser: string;
 };
 
 export type Error = {

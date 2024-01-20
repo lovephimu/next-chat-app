@@ -3,7 +3,9 @@ import { Message } from '@/database/database';
 import Pusher from 'pusher-js';
 import { useEffect, useState } from 'react';
 
-export default function Chat() {
+type Props = { ip: string };
+
+export default function Chat(props: Props) {
   // States
 
   const [messages, setMessages] = useState<Message[]>([]);
@@ -27,7 +29,7 @@ export default function Chat() {
       method: 'POST',
       body: JSON.stringify({
         messageText: newMessage,
-        chatUser: 'testtyp',
+        chatUser: props.ip,
       }),
     });
 
@@ -69,18 +71,23 @@ export default function Chat() {
   }, []);
 
   return (
-    <section>
+    <section className="flex flex-col h-full w-full max-w-lg">
       {/* Chat messages */}
 
-      <div>
+      <div className="flex-grow flex flex-col justify-end">
         {messages.map((message) => {
-          return <p key={`${message.id}`}>{message.messageText}</p>;
+          return (
+            <div className="mb-4" key={`${message.id}`}>
+              <p className="text-xl">{message.messageText}</p>
+              <p className="text-sm font-extralight">{message.chatUser}</p>
+            </div>
+          );
         })}
       </div>
 
       {/* Inputs */}
 
-      <div className="flex justify-between mt-4 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center">
+      <div className="h-auto flex justify-between mt-4 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center">
         <input
           className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink focus:ring-0 p-4 rounded-lg w-full"
           type="text"

@@ -17,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-primaryBlue ${inter.className} h-screen`}>
-        <header className="p-4">
+      <body
+        className={`bg-primaryBlue ${inter.className} h-screen flex flex-col`}
+      >
+        <header className="flex justify-center p-4">
           <ChatLogo />
         </header>
         {children}
