@@ -1,5 +1,6 @@
 'use client';
 import { Message } from '@/database/database';
+import Pusher from 'pusher-js';
 import { useEffect, useState } from 'react';
 
 export default function Chat() {
@@ -46,7 +47,25 @@ export default function Chat() {
   // UseEffects
 
   useEffect(() => {
+    // Fetch current messages
     getCurrentMessages();
+
+    // Subscribe to Pusher channel
+    const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY!, {
+      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
+    });
+
+    const channel = pusher.subscribe('earthy-dawn-65');
+    channel.bind('new-message', (data: any) => {
+      console.log('Pusher event received:', data);
+      getCurrentMessages(); // Fetch messages again when a new message is received
+    });
+
+    // Cleanup: Unsubscribe from the channel when the component unmounts
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
   }, []);
 
   return (
