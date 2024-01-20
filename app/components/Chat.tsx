@@ -60,9 +60,9 @@ export default function Chat() {
 
       {/* Inputs */}
 
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-4 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center">
         <input
-          className="bg-transparent border border-primaryPink focus:border-primaryPink focus:ring-0 p-4"
+          className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink focus:ring-0 p-4 rounded-lg w-full"
           type="text"
           autoFocus
           onChange={(event) => {
@@ -71,7 +71,7 @@ export default function Chat() {
           onKeyDown={(event) => handleKeyDown(event)}
           value={newMessage}
         ></input>
-        <div>
+        <div className="flex justify-center w-20">
           <button onClick={async () => await sendMessage()}>Send</button>
         </div>
       </div>

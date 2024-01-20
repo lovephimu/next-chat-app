@@ -17,8 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-primaryBlue ${inter.className} m-4`}>
-        <header className="mb-4">
+      <body className={`bg-primaryBlue ${inter.className} h-screen`}>
+        <header className="p-4">
           <ChatLogo />
         </header>
         {children}
