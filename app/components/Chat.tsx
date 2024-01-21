@@ -3,7 +3,7 @@ import { Message } from '@/database/database';
 import Pusher from 'pusher-js';
 import { useEffect, useState } from 'react';
 
-type Props = { ip: string };
+type Props = { ip: string; browser: string };
 
 export default function Chat(props: Props) {
   // States
@@ -29,7 +29,7 @@ export default function Chat(props: Props) {
       method: 'POST',
       body: JSON.stringify({
         messageText: newMessage,
-        chatUser: props.ip,
+        chatUser: `${props.browser} @ ${props.ip}`,
       }),
     });
 

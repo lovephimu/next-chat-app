@@ -1,14 +1,22 @@
+import { getUserBrowserName } from '@/util/functions/getUserBrowserName';
+import { getUserIp } from '@/util/functions/getUserIp';
 import { headers } from 'next/headers';
-import Image from 'next/image';
 import Chat from './components/Chat';
 
-export default function Home() {
-  const header = headers();
-  const ip = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
+const header = headers();
 
+// get user IP & user browser name
+
+const ip = getUserIp(header);
+console.log(ip);
+
+const browser = getUserBrowserName(header);
+console.log(browser);
+
+export default function Home() {
   return (
     <main className="text-primaryPink p-4 h-full w-full flex justify-center">
-      <Chat ip={ip} />
+      <Chat ip={ip} browser={browser} />
     </main>
   );
 }
