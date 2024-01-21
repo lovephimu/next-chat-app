@@ -1,17 +1,23 @@
 'use client';
 import { Message } from '@/database/database';
 import Pusher from 'pusher-js';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type Props = { ip: string; browser: string };
+
+const updateSwitch = false;
 
 export default function Chat(props: Props) {
   // States
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const [update, setUpdate] = useState();
+  const [update, setUpdate] = useState(updateSwitch);
   const [blockEnterKey, setBlockEnterKey] = useState(false);
+
+  // References
+
+  const scrollableDivRef = useRef<HTMLDivElement>(null);
 
   // Fetch functions to read and write Messages
 
@@ -49,6 +55,7 @@ export default function Chat(props: Props) {
 
     setNewMessage('');
     setBlockEnterKey(false);
+    setUpdate(!updateSwitch);
   }
 
   // UI functions
@@ -60,6 +67,12 @@ export default function Chat(props: Props) {
   }
 
   // UseEffects
+  useEffect(() => {
+    const scrollableDiv = scrollableDivRef.current;
+    if (scrollableDiv) {
+      scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+    }
+  }, [messages]);
 
   useEffect(() => {
     // Fetch current messages
@@ -88,8 +101,8 @@ export default function Chat(props: Props) {
     /(\bhttps?:\/\/|\bwww\.|\b)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?/gi;
 
   return (
-    <section className="flex p-4 flex-grow flex-col self-end w-full max-w-lg overflow-y-auto justify-end max-h-[80dvh]">
-      <div className="">
+    <section className="flex p-4 flex-grow flex-col self-end w-full max-w-lg  justify-end max-h-[80dvh]">
+      <div className="overflow-y-auto flex-grow" ref={scrollableDivRef}>
         {messages.map((message) => {
           const urls = [];
           let match;
