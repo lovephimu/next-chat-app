@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={`bg-primaryBlue ${inter.className} dynamic-full-height flex flex-col`}
       >
-        <header className="flex justify-center p-4">
+        <header className="flex justify-center">
           <ChatLogo />
         </header>
         {children}

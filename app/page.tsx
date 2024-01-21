@@ -14,7 +14,7 @@ export default function Home() {
   const browser = getUserBrowserName(header);
   console.log(browser);
   return (
-    <main className="text-primaryPink p-4 h-full w-full flex justify-center">
+    <main className="text-primaryPink  h-full w-full flex justify-center">
       <Chat ip={ip} browser={browser} />
     </main>
   );

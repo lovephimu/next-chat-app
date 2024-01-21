@@ -87,29 +87,18 @@ export default function Chat(props: Props) {
   const urlPattern =
     /(\bhttps?:\/\/|\bwww\.|\b)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?/gi;
 
-  // function isUrl(word: string) {
-  //   const urlPattern =
-  //     /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
-  //   return word.match(urlPattern);
-  // }
-
-  // function addMarkup(word: string) {
-  //   return isUrl(word) ? `<a href="${word}">${word}</a>` : word;
-  // }
   return (
-    <section className="flex flex-col h-full w-full max-w-lg">
-      <div className="flex-grow flex flex-col justify-end">
+    <section className="flex p-4 flex-grow flex-col self-end w-full max-w-lg overflow-y-auto justify-end max-h-[80dvh]">
+      <div className="">
         {messages.map((message) => {
           const urls = [];
           let match;
           let lastIndex = 0;
           const segments = [];
-
           // Find all URLs and store them along with their indices
           while ((match = urlPattern.exec(message.messageText)) !== null) {
             urls.push({ url: match[0], index: match.index });
           }
-
           // Build the segments array
           urls.forEach((item, index) => {
             // Add text segment before the URL
@@ -118,10 +107,8 @@ export default function Chat(props: Props) {
             segments.push(item.url);
             lastIndex = item.index + item.url.length;
           });
-
           // Add any remaining text after the last URL
           segments.push(message.messageText.slice(lastIndex));
-
           return (
             <div className="mb-4" key={message.id}>
               <p className="text-xl">
@@ -153,6 +140,7 @@ export default function Chat(props: Props) {
           );
         })}
       </div>
+
       {/* Inputs */}
 
       <div className="h-auto flex justify-between mt-4 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center">
