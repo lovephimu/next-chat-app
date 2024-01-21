@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-primaryBlue ${inter.className} h-screen flex flex-col`}
+        className={`bg-primaryBlue ${inter.className} dynamic-full-height flex flex-col`}
       >
         <header className="flex justify-center p-4">
           <ChatLogo />

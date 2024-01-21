@@ -11,6 +11,7 @@ export default function Chat(props: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [update, setUpdate] = useState();
+  const [blockEnterKey, setBlockEnterKey] = useState(false);
 
   // Fetch functions to read and write Messages
 
@@ -25,6 +26,12 @@ export default function Chat(props: Props) {
   }
 
   async function sendMessage() {
+    // client side check if message is empty or too long
+
+    if (!newMessage || newMessage.length > 240) {
+      return;
+    }
+
     const response = await fetch('/api/messages', {
       method: 'POST',
       body: JSON.stringify({
@@ -36,12 +43,14 @@ export default function Chat(props: Props) {
     // const data = await response.json();
 
     setNewMessage('');
+    setBlockEnterKey(false);
   }
 
   // UX functions
 
   function handleKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !blockEnterKey) {
+      setBlockEnterKey(true);
       sendMessage();
     }
   }
