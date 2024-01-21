@@ -1,7 +1,7 @@
 'use client';
 import { Message } from '@/database/database';
 import Pusher from 'pusher-js';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = { ip: string; browser: string };
 
@@ -26,9 +26,14 @@ export default function Chat(props: Props) {
   }
 
   async function sendMessage() {
+    // lock input to avoid double posts
+
+    setBlockEnterKey(true);
+
     // client side check if message is empty or too long
 
-    if (!newMessage || newMessage.length > 240) {
+    if (!newMessage || newMessage.length > 280) {
+      setBlockEnterKey(false);
       return;
     }
 
@@ -46,11 +51,10 @@ export default function Chat(props: Props) {
     setBlockEnterKey(false);
   }
 
-  // UX functions
+  // UI functions
 
   function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Enter' && !blockEnterKey) {
-      setBlockEnterKey(true);
       sendMessage();
     }
   }
@@ -79,21 +83,76 @@ export default function Chat(props: Props) {
     };
   }, []);
 
+  // Text formatting functions
+  const urlPattern =
+    /(\bhttps?:\/\/|\bwww\.|\b)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?/gi;
+
+  // function isUrl(word: string) {
+  //   const urlPattern =
+  //     /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
+  //   return word.match(urlPattern);
+  // }
+
+  // function addMarkup(word: string) {
+  //   return isUrl(word) ? `<a href="${word}">${word}</a>` : word;
+  // }
   return (
     <section className="flex flex-col h-full w-full max-w-lg">
-      {/* Chat messages */}
-
       <div className="flex-grow flex flex-col justify-end">
         {messages.map((message) => {
+          const urls = [];
+          let match;
+          let lastIndex = 0;
+          const segments = [];
+
+          // Find all URLs and store them along with their indices
+          while ((match = urlPattern.exec(message.messageText)) !== null) {
+            urls.push({ url: match[0], index: match.index });
+          }
+
+          // Build the segments array
+          urls.forEach((item, index) => {
+            // Add text segment before the URL
+            segments.push(message.messageText.slice(lastIndex, item.index));
+            // Add the URL
+            segments.push(item.url);
+            lastIndex = item.index + item.url.length;
+          });
+
+          // Add any remaining text after the last URL
+          segments.push(message.messageText.slice(lastIndex));
+
           return (
-            <div className="mb-4" key={`${message.id}`}>
-              <p className="text-xl">{message.messageText}</p>
+            <div className="mb-4" key={message.id}>
+              <p className="text-xl">
+                {segments.map((segment, index) => {
+                  if (urlPattern.test(segment)) {
+                    const href = segment.startsWith('http')
+                      ? segment
+                      : `http://${segment}`;
+                    return (
+                      <a
+                        key={index}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-4 hover:text-pink-400"
+                      >
+                        {segment}
+                      </a>
+                    );
+                  } else {
+                    return (
+                      <React.Fragment key={index}>{segment}</React.Fragment>
+                    );
+                  }
+                })}
+              </p>
               <p className="text-sm font-extralight">{message.chatUser}</p>
             </div>
           );
         })}
       </div>
-
       {/* Inputs */}
 
       <div className="h-auto flex justify-between mt-4 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center">
