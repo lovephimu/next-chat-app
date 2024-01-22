@@ -38,7 +38,7 @@ export default function Chat(props: Props) {
 
     // client side check if message is empty or too long
 
-    if (!newMessage || newMessage.length > 280) {
+    if (!newMessage.trim() || newMessage.length > 280) {
       setBlockEnterKey(false);
       return;
     }
@@ -51,7 +51,7 @@ export default function Chat(props: Props) {
       }),
     });
 
-    // const data = await response.json();
+    const data = await response.json();
 
     setNewMessage('');
     setBlockEnterKey(false);
@@ -98,7 +98,9 @@ export default function Chat(props: Props) {
 
   // Text formatting functions
   const urlPattern =
-    /(\bhttps?:\/\/|\bwww\.|\b)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?/gi;
+    /(?<![\w])(https?:\/\/|www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi;
+
+  const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi;
 
   return (
     <section className="flex p-4 flex-grow flex-col self-end w-full max-w-lg  justify-end max-h-[80dvh]">
@@ -127,20 +129,33 @@ export default function Chat(props: Props) {
               <p className="text-xl">
                 {segments.map((segment, index) => {
                   if (urlPattern.test(segment)) {
-                    const href = segment.startsWith('http')
-                      ? segment
-                      : `http://${segment}`;
-                    return (
-                      <a
-                        key={index}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline decoration-4 hover:text-pink-400"
-                      >
-                        {segment}
-                      </a>
-                    );
+                    if (emailPattern.test(segment)) {
+                      return (
+                        <a
+                          key={index}
+                          href={`mailto:${segment}`}
+                          className="underline decoration-4 hover:text-pink-400"
+                        >
+                          {segment}
+                        </a>
+                      );
+                    } else {
+                      // It's a URL but not an email
+                      const href = segment.startsWith('http')
+                        ? segment
+                        : `http://${segment}`;
+                      return (
+                        <a
+                          key={index}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-4 hover:text-pink-400"
+                        >
+                          {segment}
+                        </a>
+                      );
+                    }
                   } else {
                     return (
                       <React.Fragment key={index}>{segment}</React.Fragment>
@@ -168,7 +183,12 @@ export default function Chat(props: Props) {
           value={newMessage}
         ></input>
         <div className="flex justify-center w-20">
-          <button onClick={async () => await sendMessage()}>Send</button>
+          <button
+            className={blockEnterKey ? 'text-gray-300' : ''}
+            onClick={async () => await sendMessage()}
+          >
+            Send
+          </button>
         </div>
       </div>
     </section>
