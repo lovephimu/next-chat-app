@@ -16,6 +16,14 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### Technical Conception
 
+- An open chat room that updates upon receiving a new message.
+- A PostgreSQL database stores 5 messages - when limit is exceeded older messages get deleted until the limit is matched again
+- Frontend an database are communicating over restAPI
+- User can input messages of up to 280 characters (empty messages are not allowed)
+- When the API completes the database queries successfully a Pusher event is triggered
+- In the frontend a useEffect is subscribed to a Pusher channel
+- When receiving a signal from Pusher the frontend triggers a React rerender by updating the states with the newest messages
+
 ### Todos
 
 - Add Jest tests

@@ -18,6 +18,7 @@ export default function Chat(props: Props) {
   // References
 
   const scrollableDivRef = useRef<HTMLDivElement>(null);
+  const characterLimit = 280;
 
   // Fetch functions to read and write Messages
 
@@ -38,7 +39,7 @@ export default function Chat(props: Props) {
 
     // client side check if message is empty or too long
 
-    if (!newMessage.trim() || newMessage.length > 280) {
+    if (!newMessage.trim() || newMessage.length > characterLimit) {
       setBlockEnterKey(false);
       return;
     }
@@ -126,7 +127,7 @@ export default function Chat(props: Props) {
           segments.push(message.messageText.slice(lastIndex));
           return (
             <div className="mb-4" key={message.id}>
-              <p className="text-xl">
+              <p className="text-xl break-words hyphens-auto">
                 {segments.map((segment, index) => {
                   if (urlPattern.test(segment)) {
                     if (emailPattern.test(segment)) {
@@ -171,7 +172,16 @@ export default function Chat(props: Props) {
 
       {/* Inputs */}
 
-      <div className="h-auto flex justify-between mt-4 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center">
+      <div className="h-auto flex justify-between mt-5 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center relative">
+        <span
+          className={`text-sm font-extralight absolute top-[-18px] right-[5rem] ${
+            newMessage.length > characterLimit
+              ? 'text-red-400'
+              : 'text-primaryPink'
+          }`}
+        >
+          {newMessage.length}/{characterLimit}
+        </span>
         <input
           className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink focus:ring-0 p-4 rounded-lg w-full"
           type="text"
