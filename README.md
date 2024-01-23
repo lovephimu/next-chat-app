@@ -75,4 +75,4 @@ NEXT_PUBLIC_PUSHER_CLUSTER=<pusher cluster>
 
 5. Before using `pnpm dev` you have to migrate up using pnpm `migrate up`
 
-6. All set!
+6. All set!!
