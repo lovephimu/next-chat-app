@@ -185,7 +185,6 @@ export default function Chat(props: Props) {
         <input
           className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink focus:ring-0 p-4 rounded-lg w-full"
           type="text"
-          autoFocus
           onChange={(event) => {
             setNewMessage(event.currentTarget.value);
           }}
