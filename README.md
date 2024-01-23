@@ -1,3 +1,5 @@
+![Chat Logo](https://github.com/lovephimu/next-chat-app/raw/main/public/chat_logo_markup.png)
+
 next-chat-app:
 
 # Chat-Schibidi
