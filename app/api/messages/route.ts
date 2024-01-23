@@ -18,7 +18,6 @@ type MessageResponseBodyPost = { message: Message } | Error;
 
 const messageSchema = z.object({
   messageText: z.string(),
-  chatUser: z.string(),
 });
 
 export async function GET(

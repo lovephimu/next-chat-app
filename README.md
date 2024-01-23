@@ -32,16 +32,13 @@ An open chat-room where everyone with an IP and a browser can post!
 
 - UI Feedback on erros
 - UI for large screens
+- Fun stuff like showing which browsers visited the most
 
 ### Problems
 
 UI:
 
 - Send button allows super-fast-double clicking
-
-IP/User Agent:
-
-- Evaluation needs to be moved to API, leaving the website open and switching networks wont update IP or browser info
 
 ### Local setup (using pnpm / npm will work as well)
 

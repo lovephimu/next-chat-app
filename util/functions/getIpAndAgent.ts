@@ -9,5 +9,19 @@ export function getIpAndAgent(request: NextRequest): string {
   const agent = browser ? userAgentFromString(browser) : null;
   const browserName = agent?.browser?.name || 'unknown browser';
 
-  return `${browserName} @ ${requestIp}`;
+  const browserAgent = () => {
+    if (agent && !agent?.browser?.name) {
+      const regex = /^[^/]*/;
+      const match = agent.ua.match(regex);
+      return match;
+    } else if (agent?.browser?.name) {
+      return browserName;
+    } else {
+      return 'unknown browser';
+    }
+  };
+
+  const actualBrowser = browserAgent();
+
+  return `${actualBrowser} @ ${requestIp}`;
 }
