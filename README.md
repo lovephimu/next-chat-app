@@ -1,4 +1,4 @@
-![Chat Logo](https://github.com/lovephimu/next-chat-app/raw/main/public/chat_logo_markup.png)
+<img src="https://github.com/lovephimu/next-chat-app/raw/main/public/chat_logo_markup.png" alt="Chat Logo" width="200" height="auto">
 
 next-chat-app:
 
