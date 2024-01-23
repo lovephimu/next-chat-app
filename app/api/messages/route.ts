@@ -5,8 +5,9 @@ import {
   getMessages,
   Message,
 } from '@/database/database';
+import { getIpAndAgent } from '@/util/functions/getIpAndAgent';
 import { getOldMessageIds } from '@/util/functions/getOldMessageIds';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, userAgentFromString } from 'next/server';
 import Pusher from 'pusher';
 import { z } from 'zod';
 
@@ -30,6 +31,10 @@ export async function GET(
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<MessageResponseBodyPost>> {
+  // Server side browser an ip fetching
+
+  const userSignature = getIpAndAgent(request);
+
   // Ensure that environment variables are defined
   const appId = process.env.PUSHER_APP_ID;
   const key = process.env.PUSHER_KEY;
@@ -88,10 +93,7 @@ export async function POST(
 
   // 4. Save new message
 
-  const message = await createMessage(
-    result.data.messageText,
-    result.data.chatUser,
-  );
+  const message = await createMessage(result.data.messageText, userSignature);
 
   if (!message) {
     return NextResponse.json(

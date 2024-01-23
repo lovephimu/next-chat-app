@@ -1,5 +1,3 @@
-import { Header } from 'next/dist/lib/load-custom-routes';
-import { headers } from 'next/headers';
 import { userAgentFromString } from 'next/server';
 
 export function getUserBrowserName(header: Headers): string {

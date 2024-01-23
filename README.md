@@ -14,7 +14,9 @@ An open chat-room where everyone with an IP and a browser can post!
 - [PostgreSQL](https://www.postgresql.org/)
 - [Ley/Migrations](https://github.com/lukeed/ley)
 - REST API
+- [Pusher Websocket API](https://pusher.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [JEST](https://jestjs.io/)
 
 ### Technical Conception
 
@@ -28,7 +30,6 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### Todos
 
-- Add Jest tests
 - UI Feedback on erros
 - UI for large screens
 
