@@ -3,7 +3,9 @@ export default function ChatLogo() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 467 138"
-      className={'text-primaryPink w-full  p-4 max-w-lg max-h-[20dvh]'}
+      className={
+        'text-primaryPink p-4 sm:p-8 max-w-full max-h-[20dvh] sm:max-w-2xl lg:max-h-[180px]'
+      }
       fill="currentColor"
     >
       <title>chat_logo</title>
