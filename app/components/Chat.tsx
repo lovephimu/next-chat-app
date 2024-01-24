@@ -101,7 +101,7 @@ export default function Chat() {
   const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi;
 
   return (
-    <section className="flex p-4 flex-grow flex-col self-end w-full justify-end max-h-[80dvh] sm:max-h-[70dvh] lg:w-full max-w-full sm:max-w-2xl  sm:px-8 sm:pb-8 sm:pt-0">
+    <section className="flex p-4 flex-grow flex-col self-end w-full justify-end h-[80dvh] max-h-[80dvh] sm:max-h-[70dvh] sm:h-full lg:w-full max-w-full sm:max-w-2xl sm:px-8 sm:pb-8 sm:pt-0">
       {messages.length === 0 ? (
         <div className="w-full flex flex-col h-[70dvh] flex-grow justify-center items-center">
           <span className="loading loading-dots loading-lg"></span>

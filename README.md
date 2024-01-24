@@ -28,6 +28,10 @@ An open chat-room where everyone with an IP and a browser can post!
 - In the frontend a useEffect is subscribed to a Pusher channel
 - When receiving a signal from Pusher the frontend triggers a React rerender by updating the states with the newest messages
 
+### UI
+
+-Screen resolution covered: Mobile to 1080p
+
 ### Todos
 
 - UI Feedback on erros
