@@ -24,7 +24,7 @@ export default function RootLayout({
           <section className="flex h-[20dvh] justify-center w-full sm:justify-start sm:max-w-2xl sm:border-primaryPink sm:border-t sm:border-x sm:rounded-t-2xl">
             <ChatLogo />
           </section>
-          <section className="">{children}</section>
+          <section className="w-full flex justify-center">{children}</section>
         </main>
       </body>
     </html>
