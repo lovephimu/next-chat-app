@@ -5,3 +5,12 @@
 .dynamic-full-height {
   height: 100dvh;
 }
+
+@media (min-height: 2000px) {
+  .wide-screen-height {
+    height: 35dvh !important;
+  }
+  .wide-screen-height-logo {
+    height: 10dvh !important;
+  }
+}
