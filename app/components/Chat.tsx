@@ -177,7 +177,7 @@ export default function Chat() {
 
       {/* Inputs */}
 
-      <div className="h-auto flex justify-between mt-5 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center relative">
+      <div className="h-auto flex justify-between z-20 mt-5 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center relative">
         <span
           className={`text-sm font-extralight absolute top-[-18px] right-[5rem] ${
             newMessage.length >= globalCharacterLimit
@@ -187,8 +187,19 @@ export default function Chat() {
         >
           {newMessage.length}/{globalCharacterLimit}
         </span>
+        {/* Info messages */}
+        <span
+          aria-hidden={newMessage.length >= globalCharacterLimit ? true : false}
+          className={`text-sm font-extralight transition duration-500 absolute message-alert left-[1rem] ${
+            newMessage.length >= globalCharacterLimit
+              ? 'text-red-400 message-alert-active'
+              : 'text-primaryPink'
+          }`}
+        >
+          Charcter limit reached.
+        </span>
         <input
-          className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink focus:ring-0 p-4 rounded-lg w-full"
+          className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink bg-primaryPink focus:ring-0 p-4 rounded-lg w-full"
           type="text"
           onChange={(event) => {
             setNewMessage(event.currentTarget.value);

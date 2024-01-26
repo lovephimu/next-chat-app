@@ -16,7 +16,6 @@ An open chat-room where everyone with an IP and a browser can post!
 - [Pusher Websocket API](https://pusher.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [JEST](https://jestjs.io/)
-- [Playwright](https://playwright.dev/)
 - REST API
 
 ### Technical Conception
@@ -38,6 +37,7 @@ An open chat-room where everyone with an IP and a browser can post!
 - UI Feedback on erros
 - UI for large screens
 - Fun stuff like showing which browsers visited the most
+- Add playwright tests
 
 ### Problems
 

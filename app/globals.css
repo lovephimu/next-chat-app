@@ -18,3 +18,13 @@
     border-style: solid; /* Applies to all borders */
   }
 }
+
+.message-alert {
+  top: 0px;
+  transition: all 500ms ease;
+  z-index: -1;
+}
+
+.message-alert-active {
+  top: -18px !important;
+}
