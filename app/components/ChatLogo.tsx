@@ -1,14 +1,16 @@
 export default function ChatLogo() {
   return (
     <svg
+      id="chat-logo"
+      aria-label="Chat Schibidi Logo"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 467 138"
       className={
-        'text-primaryPink p-4 sm:p-8 max-w-full max-h-[20dvh] sm:max-w-2xl lg:max-h-[180px]'
+        'text-primaryPink hover:text-pink-400 p-4 sm:p-8 max-w-full max-h-[20dvh] sm:max-w-2xl lg:max-h-[180px] transition-all duration-500'
       }
       fill="currentColor"
     >
-      <title>chat_logo</title>
+      <title>Chat Schibidi Logo</title>
       <g id="Layer_2" data-name="Layer 2">
         <path d="M68.62,79.17,26.29,60.61v35a7.43,7.43,0,0,0,7.42,7.42H104a7.42,7.42,0,0,0,7.41-7.42V60.6Z" />
         <path d="M68.87.5A68.5,68.5,0,1,0,137.37,69,68.5,68.5,0,0,0,68.87.5Zm45.95,95.15A10.8,10.8,0,0,1,104,106.44H33.71A10.8,10.8,0,0,1,22.92,95.65V41.93A10.8,10.8,0,0,1,33.71,31.14H104a10.8,10.8,0,0,1,10.79,10.79Z" />

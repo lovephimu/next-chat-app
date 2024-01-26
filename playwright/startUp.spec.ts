@@ -1,11 +1,12 @@
 import { expect, test } from '@playwright/test';
 
-test('navigation test', async ({ page }) => {
+test('input test', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  // await expect(
-  //   page.getByRole('heading', {
-  //     name: 'Lost in Lone',
-  //   }),
-  // ).toBeVisible();
+  await expect(page.locator('[id="chat-logo"]')).toBeVisible();
+
+  await expect(page.getByRole('textbox')).toBeVisible();
+  await page.getByRole('textbox').fill('this is playwright test');
+  await page.getByRole('button', { name: 'Send' }).click();
+  await expect(page.getByRole('textbox')).toHaveValue('');
 });

@@ -1,5 +1,7 @@
 'use client';
 import { Message } from '@/database/database';
+import { checkedMessageLength } from '@/util/functions/checkedMessageLength';
+import { globalCharacterLimit } from '@/util/variables/globalVariables';
 import Pusher from 'pusher-js';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -16,7 +18,6 @@ export default function Chat() {
   // References
 
   const scrollableDivRef = useRef<HTMLDivElement>(null);
-  const characterLimit = 280;
 
   // Fetch functions to read and write Messages
 
@@ -37,7 +38,7 @@ export default function Chat() {
 
     // client side check if message is empty or too long
 
-    if (!newMessage.trim() || newMessage.length > characterLimit) {
+    if (!checkedMessageLength(newMessage, globalCharacterLimit)) {
       setBlockEnterKey(false);
       return;
     }
@@ -179,12 +180,12 @@ export default function Chat() {
       <div className="h-auto flex justify-between mt-5 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center relative">
         <span
           className={`text-sm font-extralight absolute top-[-18px] right-[5rem] ${
-            newMessage.length > characterLimit
+            newMessage.length > globalCharacterLimit
               ? 'text-red-400'
               : 'text-primaryPink'
           }`}
         >
-          {newMessage.length}/{characterLimit}
+          {newMessage.length}/{globalCharacterLimit}
         </span>
         <input
           className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink focus:ring-0 p-4 rounded-lg w-full"

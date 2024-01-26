@@ -13,16 +13,17 @@ An open chat-room where everyone with an IP and a browser can post!
 - [Next.js](https://nextjs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Ley/Migrations](https://github.com/lukeed/ley)
-- REST API
 - [Pusher Websocket API](https://pusher.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [JEST](https://jestjs.io/)
+- [Playwright](https://playwright.dev/)
+- REST API
 
 ### Technical Conception
 
 - An open chat room that updates upon receiving a new message.
 - A PostgreSQL database stores 5 messages - when limit is exceeded older messages get deleted until the limit is matched again
-- Frontend an database are communicating over restAPI
+- Frontend and database are communicating over restAPI
 - User can input messages of up to 280 characters (empty messages are not allowed)
 - When the API completes the database queries successfully a Pusher event is triggered
 - In the frontend a useEffect is subscribed to a Pusher channel
@@ -80,3 +81,8 @@ NEXT_PUBLIC_PUSHER_CLUSTER=<pusher cluster>
 5. Before using `pnpm dev` you have to migrate up using pnpm `migrate up`
 
 6. All set!!
+
+### Feature List
+
+- Character limit & maximum stored messages are controlled by the global variables "globalCharacterLimit" and "globalMessageLimit". By default they are set to 280 and 5.
+- Character limit is checked client and server side to ensure the correct format at all times

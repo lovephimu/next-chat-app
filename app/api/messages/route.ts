@@ -7,6 +7,7 @@ import {
 } from '@/database/database';
 import { getIpAndAgent } from '@/util/functions/getIpAndAgent';
 import { getOldMessageIds } from '@/util/functions/getOldMessageIds';
+import { globalCharacterLimit } from '@/util/variables/globalVariables';
 import { NextRequest, NextResponse, userAgentFromString } from 'next/server';
 import Pusher from 'pusher';
 import { z } from 'zod';
@@ -17,7 +18,12 @@ type MessageResponseBodyPost = { message: Message } | Error;
 // Schema for checking content
 
 const messageSchema = z.object({
-  messageText: z.string(),
+  messageText: z
+    .string()
+    .max(globalCharacterLimit, { message: 'Message exceeds character limit' })
+    .refine((value) => value.trim().length > 0, {
+      message: 'Message cannot be empty or just whitespace',
+    }),
 });
 
 export async function GET(
@@ -68,7 +74,7 @@ export async function POST(
     console.log(result.error);
     return NextResponse.json(
       {
-        error: 'Data is incorrect or incomplete.',
+        error: result.error.errors[0]?.message,
       },
       { status: 400 },
     );

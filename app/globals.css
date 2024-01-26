@@ -13,4 +13,8 @@
   .wide-screen-height-logo {
     height: 10dvh !important;
   }
+  .custom-border {
+    border-width: 0 1px 8px 1px; /* top, right, bottom, left */
+    border-style: solid; /* Applies to all borders */
+  }
 }
