@@ -1,18 +1,20 @@
 'use client';
 import { Message } from '@/database/database';
 import { checkedMessageLength } from '@/util/functions/checkedMessageLength';
-import { globalCharacterLimit } from '@/util/variables/globalVariables';
+import {
+  emailPattern,
+  globalCharacterLimit,
+  urlPattern,
+} from '@/util/variables/globalVariables';
 import Pusher from 'pusher-js';
 import React, { useEffect, useRef, useState } from 'react';
-
-const updateSwitch = false;
+import InputButton from './InputButton';
 
 export default function Chat() {
   // States
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const [update, setUpdate] = useState(updateSwitch);
   const [blockEnterKey, setBlockEnterKey] = useState(false);
 
   // References
@@ -54,7 +56,6 @@ export default function Chat() {
 
     setNewMessage('');
     setBlockEnterKey(false);
-    setUpdate(!updateSwitch);
   }
 
   // UI functions
@@ -94,12 +95,6 @@ export default function Chat() {
       channel.unsubscribe();
     };
   }, []);
-
-  // Text formatting functions
-  const urlPattern =
-    /(?<![\w])(https?:\/\/|www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi;
-
-  const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi;
 
   return (
     <section className="flex p-4 flex-grow flex-col self-end w-full justify-end h-[80dvh] max-h-[80dvh] sm:max-h-[70dvh] sm:h-full sm:max-w-2xl sm:px-8 sm:pb-8 sm:pt-0">
@@ -179,10 +174,10 @@ export default function Chat() {
 
       <div className="h-auto flex justify-between z-20 mt-5 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center relative">
         <span
-          className={`text-sm font-extralight absolute top-[-18px] right-[5rem] ${
-            newMessage.length >= globalCharacterLimit
-              ? 'text-red-400'
-              : 'text-primaryPink'
+          className={`text-sm transition duration-500 font-extralight absolute top-[-18px] right-[5rem] ${
+            newMessage.length <= globalCharacterLimit
+              ? 'text-primaryPink'
+              : 'text-red-400'
           }`}
         >
           {newMessage.length}/{globalCharacterLimit}
@@ -190,16 +185,21 @@ export default function Chat() {
         {/* Info messages */}
         <span
           aria-hidden={newMessage.length >= globalCharacterLimit ? true : false}
-          className={`text-sm font-extralight transition duration-500 absolute message-alert left-[1rem] ${
+          className={`text-sm font-extralight transition duration-500 absolute text-primaryPink message-alert left-[1rem] ${
             newMessage.length >= globalCharacterLimit
-              ? 'text-red-400 message-alert-active'
-              : 'text-primaryPink'
-          }`}
+              ? ' message-alert-active'
+              : 'opacity-0'
+          }
+          ${newMessage.length > globalCharacterLimit ? 'text-red-400 ' : ''}`}
         >
-          Charcter limit reached.
+          Character limit reached.
         </span>
+        <label htmlFor="message-input" className="sr-only">
+          Message input:
+        </label>
         <input
-          className="bg-transparent border-2 border-primaryBlue focus:border-primaryPink bg-primaryPink focus:ring-0 p-4 rounded-lg w-full"
+          id="message-input"
+          className="border-2 border-primaryBlue focus:border-primaryPink bg-primaryPink focus:ring-0 p-4 rounded-lg w-full"
           type="text"
           onChange={(event) => {
             setNewMessage(event.currentTarget.value);
@@ -207,14 +207,11 @@ export default function Chat() {
           onKeyDown={(event) => handleKeyDown(event)}
           value={newMessage}
         ></input>
-        <div className="flex justify-center w-20">
-          <button
-            className={blockEnterKey ? 'text-gray-300' : ''}
-            onClick={async () => await sendMessage()}
-          >
-            Send
-          </button>
-        </div>
+        <InputButton
+          function={sendMessage}
+          isBlocked={blockEnterKey}
+          title={'Send'}
+        />
       </div>
     </section>
   );
