@@ -180,7 +180,7 @@ export default function Chat() {
       <div className="h-auto flex justify-between mt-5 p-1 bg-primaryPink border-primaryPink rounded-xl text-primaryBlue items-center relative">
         <span
           className={`text-sm font-extralight absolute top-[-18px] right-[5rem] ${
-            newMessage.length > globalCharacterLimit
+            newMessage.length >= globalCharacterLimit
               ? 'text-red-400'
               : 'text-primaryPink'
           }`}
