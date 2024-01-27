@@ -17,6 +17,7 @@ An open chat-room where everyone with an IP and a browser can post!
 - [Tailwind CSS](https://tailwindcss.com/)
 - [JEST](https://jestjs.io/)
 - REST API
+- TypeScript
 
 ### Technical Conception
 
@@ -30,14 +31,15 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### UI
 
--Screen resolution covered: Mobile to 1080p
+- The chat interface has a simplistic design in the spirit of old open chat rooms.
+- While there is mainly the chat interface the possibility of navigating to other pages becomes available on bigger screens - keeping the mobile interface simple and making options available when there is space
+- Responsive design: Screen resolution covered: Mobile to 1080p
+- Visual feedback: the messaging system is designed to allow only short messages. To keep the user informed there is a character count and additional alerts when the character limit is reached or exceeded
 
 ### Todos
 
-- UI Feedback on erros
-- UI for large screens
-- Fun stuff like showing which browsers visited the most
-- Add playwright tests
+- Fun stuff like showing which browsers visited the most (D3)
+- Add ent-to-end tests
 
 ### Problems
 
@@ -78,7 +80,7 @@ NEXT_PUBLIC_PUSHER_APP_KEY=<pusher key>
 NEXT_PUBLIC_PUSHER_CLUSTER=<pusher cluster>
 ```
 
-5. Before using `pnpm dev` you have to migrate up using pnpm `migrate up`
+5. Before using `pnpm dev` you have to migrate up using `pnpm migrate up`
 
 6. All set!!
 

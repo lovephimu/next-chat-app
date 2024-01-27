@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Roboto_Mono } from 'next/font/google';
 import ChatLogo from './components/ChatLogo';
+import NavigationButton from './components/NavigationButton';
+import StatisticsLogo from './components/StatisticsLogo';
 
 const inter = Roboto_Mono({ subsets: ['latin'] });
 
@@ -21,9 +23,13 @@ export default function RootLayout({
         className={`bg-primaryBlue ${inter.className} dynamic-full-height flex flex-col w-full items-center sm:p-10`}
       >
         <main className="h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-center items-center">
-          <section className="flex h-[20dvh] justify-center w-full sm:justify-start sm:max-w-2xl sm:border-primaryPink sm:border-t sm:border-x sm:rounded-t-2xl wide-screen-height-logo">
+          <section className="flex h-[20dvh] justify-center w-full sm:justify-between sm:max-w-2xl sm:border-primaryPink sm:border-t sm:border-x sm:rounded-t-2xl wide-screen-height-logo">
             <ChatLogo />
+            <div className="hidden sm:block">
+              <NavigationButton iconComponent={StatisticsLogo} />
+            </div>
           </section>
+
           <section className="w-full flex justify-center h-[80dvh] sm:h-[70dvh] wide-screen-height">
             {children}
           </section>

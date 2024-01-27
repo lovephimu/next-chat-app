@@ -28,3 +28,32 @@
 .message-alert-active {
   top: -18px !important;
 }
+
+/* Logo Animation */
+
+.statistics-logo #Bar1 rect {
+  transition: height 0.5s ease; /* Transition effect for height change */
+  height: 0%; /* Initial height */
+}
+
+.statistics-logo:hover #Bar1 rect {
+  height: 170%; /* New height on hover */
+}
+
+.statistics-logo #Bar2 rect {
+  transition: height 0.5s ease; /* Transition effect for height change */
+  height: 0%; /* Initial height */
+}
+
+.statistics-logo:hover #Bar2 rect {
+  height: 100%; /* New height on hover */
+}
+
+.statistics-logo #Bar3 rect {
+  transition: height 0.5s ease; /* Transition effect for height change */
+  height: 0%; /* Initial height */
+}
+
+.statistics-logo:hover #Bar3 rect {
+  height: 90%; /* New height on hover */
+}
