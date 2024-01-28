@@ -7,6 +7,7 @@ export default async function VisitorsPage() {
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/messages`,
       {
         method: 'GET',
+        cache: 'no-store',
       },
     );
 
