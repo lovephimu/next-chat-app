@@ -38,7 +38,7 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### Todos
 
-- Fun stuff like showing which browsers visited the most (D3)
+- Make D3 Chart pretty and responsive
 - Add ent-to-end tests
 
 ### Problems
