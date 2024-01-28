@@ -29,31 +29,35 @@
   top: -18px !important;
 }
 
+.statistics-logo:hover #statistics-logo {
+  color: #ec4899 !important;
+}
+
 /* Logo Animation */
 
 .statistics-logo #Bar1 rect {
-  transition: height 0.5s ease; /* Transition effect for height change */
-  height: 0%; /* Initial height */
+  transition: height 0.5s ease;
+  height: 0%;
 }
 
 .statistics-logo:hover #Bar1 rect {
-  height: 170%; /* New height on hover */
+  height: 170%;
 }
 
 .statistics-logo #Bar2 rect {
-  transition: height 0.5s ease; /* Transition effect for height change */
-  height: 0%; /* Initial height */
+  transition: height 0.5s ease;
+  height: 0%;
 }
 
 .statistics-logo:hover #Bar2 rect {
-  height: 100%; /* New height on hover */
+  height: 100%;
 }
 
 .statistics-logo #Bar3 rect {
-  transition: height 0.5s ease; /* Transition effect for height change */
-  height: 0%; /* Initial height */
+  transition: height 0.5s ease;
+  height: 0%;
 }
 
 .statistics-logo:hover #Bar3 rect {
-  height: 90%; /* New height on hover */
+  height: 90%;
 }

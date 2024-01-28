@@ -182,7 +182,9 @@ export default function Chat() {
         >
           {newMessage.length}/{globalCharacterLimit}
         </span>
+
         {/* Info messages */}
+
         <span
           aria-hidden={newMessage.length >= globalCharacterLimit ? true : false}
           className={`text-sm font-extralight transition duration-500 absolute text-primaryPink message-alert left-[1rem] ${
@@ -194,6 +196,9 @@ export default function Chat() {
         >
           Character limit reached.
         </span>
+
+        {/* Input */}
+
         <label htmlFor="message-input" className="sr-only">
           Message input:
         </label>

@@ -1,17 +1,25 @@
 'use client';
+import { Message } from '@/database/database';
+import { BrowserUsage } from '@/util/functions/countUsers';
 import * as d3 from 'd3';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export default function ChatUsers() {
+type Props = {
+  agents: BrowserUsage[];
+};
+
+export default function ChatUsers(props: Props) {
+  // Sates
+
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  // Fetch functions to read and write Messages
+
   const d3Container = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
     if (d3Container.current) {
-      const data = [
-        { name: 'FireFox', count: 5 },
-        { name: 'Chrome', count: 10 },
-        { name: 'Safari', count: 15 },
-      ];
+      const data = props.agents;
 
       // Calculate max count safely
       const maxCount = d3.max(data, (d) => d.count ?? 0) ?? 0;
@@ -61,7 +69,7 @@ export default function ChatUsers() {
 
   return (
     <div>
-      <h1>Chat users and their browsers</h1>
+      <h1>Most active browsers</h1>
       <svg ref={d3Container} />
     </div>
   );

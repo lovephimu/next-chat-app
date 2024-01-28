@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Roboto_Mono } from 'next/font/google';
+import Link from 'next/link';
 import ChatLogo from './components/ChatLogo';
 import NavigationButton from './components/NavigationButton';
 import StatisticsLogo from './components/StatisticsLogo';
@@ -25,8 +26,12 @@ export default function RootLayout({
         <main className="h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-center items-center">
           <section className="flex h-[20dvh] justify-center w-full sm:justify-between sm:max-w-2xl sm:border-primaryPink sm:border-t sm:border-x sm:rounded-t-2xl wide-screen-height-logo">
             <ChatLogo />
+
             <div className="hidden sm:block">
-              <NavigationButton iconComponent={StatisticsLogo} />
+              <NavigationButton
+                route={'visitors'}
+                iconComponent={StatisticsLogo}
+              />
             </div>
           </section>
 
