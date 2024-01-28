@@ -32,29 +32,17 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### UI
 
-<figure>
-  <img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback1.png" alt="Chat Logo 1" width="200" height="auto">
-  <figcaption>Mobile layout</figcaption>
-</figure>
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_mobile.png" alt="Mobile layout" width="200" height="auto">
 
-<figure>
-  <img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback2.png" alt="Chat Logo 2" width="200" height="auto">
-  <figcaption>Screen layout (has an additional statistic button)</figcaption>
-</figure>
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_screen.png" alt="Screen layout" width="200" height="auto">
 
 - The chat interface has a simplistic design in the spirit of old open chat rooms.
 - While there is mainly the chat interface the possibility of navigating to other pages becomes available on bigger screens - keeping the mobile interface simple and making options available when there is space
 - Responsive design: Screen resolution covered: Mobile to 1080p
 
-<figure>
-<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback1.png" alt="Chat Logo" width="200" height="auto">
-<figcaption>First notification</figcaption>
-</figure>
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback1.png" alt="First notification" width="200" height="auto">
 
-<figure>
-<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback2.png" alt="Chat Logo" width="200" height="auto">
-<figcaption>Second notification</figcaption>
-</figure>
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback2.png" alt="Second notification" width="200" height="auto">
 
 - Visual feedback: the messaging system is designed to allow only short messages. To keep the user informed there is a character count and additional alerts when the character limit is reached or exceeded
 - Although most of the app is styed using Tailwind I do use CSS in special cases like the animated statistics button and the D3 chart
@@ -65,10 +53,7 @@ An open chat-room where everyone with an IP and a browser can post!
 - Character limit is checked client and server side to ensure the correct format at all times
 - Links are being rendered as clickable links using a regex.
 
-<figure>
-<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/d3_feature.png" alt="Chat Logo" width="200" height="auto">
-<figcaption>Simple D3 chart tracking browser usage</figcaption>
-</figure>
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/d3_feature.png" alt="Simple D3 chart tracking browser usage" width="200" height="auto">
 
 - A d3 chart visualizes the most used browser among the stored chat messages [D3 Statistic](https://chat-schibidi.vercel.app/visitors)
 
