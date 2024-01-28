@@ -2,6 +2,7 @@
 import { Message } from '@/database/database';
 import { BrowserUsage } from '@/util/functions/countUsers';
 import * as d3 from 'd3';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 type Props = {
@@ -10,11 +11,15 @@ type Props = {
 
 export default function ChatUsers(props: Props) {
   // Sates
-
-  const [messages, setMessages] = useState<Message[]>([]);
+  const router = useRouter();
+  const [browsers, setBrowsers] = useState<BrowserUsage[]>([]);
 
   // Fetch functions to read and write Messages
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    router.refresh();
+  }, [router]);
 
   useEffect(() => {
     const primaryPink = getComputedStyle(document.documentElement)

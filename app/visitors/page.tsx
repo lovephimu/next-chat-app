@@ -11,7 +11,7 @@ export default async function VisitorsPage() {
     );
 
     const data = await response.json();
-    console.log(data);
+
     return data.messages;
   }
 
