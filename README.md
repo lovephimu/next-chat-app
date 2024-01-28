@@ -15,6 +15,7 @@ An open chat-room where everyone with an IP and a browser can post!
 - [Ley/Migrations](https://github.com/lukeed/ley)
 - [Pusher Websocket API](https://pusher.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [D3](https://d3js.org/)
 - [JEST](https://jestjs.io/)
 - REST API
 - TypeScript
@@ -31,22 +32,38 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### UI
 
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_mobile.png" alt="Chat Logo" width="200" height="auto">
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_screen.png" alt="Chat Logo" width="200" height="auto">
+
 - The chat interface has a simplistic design in the spirit of old open chat rooms.
 - While there is mainly the chat interface the possibility of navigating to other pages becomes available on bigger screens - keeping the mobile interface simple and making options available when there is space
 - Responsive design: Screen resolution covered: Mobile to 1080p
+
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback1.png" alt="Chat Logo" width="200" height="auto">
+<img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback2.png" alt="Chat Logo" width="200" height="auto">
+
 - Visual feedback: the messaging system is designed to allow only short messages. To keep the user informed there is a character count and additional alerts when the character limit is reached or exceeded
 - Although most of the app is styed using Tailwind I do use CSS in special cases like the animated statistics button and the D3 chart
 
+### Feature List
+
+- Character limit & maximum stored messages are controlled by the global variables "globalCharacterLimit" and "globalMessageLimit". By default they are set to 280 and 5.
+- Character limit is checked client and server side to ensure the correct format at all times
+- Links are being rendered as clickable links using a regex.
+- A d3 chart visualizes the most used browser among the stored chat messages [D3 Statistic](https://chat-schibidi.vercel.app/visitors)
+
 ### Todos
 
-- Make D3 Chart pretty and responsive
 - Add ent-to-end tests
+- Add default 404 page
 
 ### Problems
 
 UI:
 
 - Send button allows super-fast-double clicking
+- Sometimes the statistics bar don't appear descending by message number as intended
+- Sometimes the URL regex responsible for identifying links fails
 
 ### Local setup (using pnpm / npm will work as well)
 
@@ -84,8 +101,3 @@ NEXT_PUBLIC_PUSHER_CLUSTER=<pusher cluster>
 5. Before using `pnpm dev` you have to migrate up using `pnpm migrate up`
 
 6. All set!!
-
-### Feature List
-
-- Character limit & maximum stored messages are controlled by the global variables "globalCharacterLimit" and "globalMessageLimit". By default they are set to 280 and 5.
-- Character limit is checked client and server side to ensure the correct format at all times
