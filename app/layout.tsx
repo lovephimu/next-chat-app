@@ -31,6 +31,7 @@ export default function RootLayout({
               <NavigationButton
                 route={'visitors'}
                 iconComponent={StatisticsLogo}
+                title="Statistics"
               />
             </div>
           </section>

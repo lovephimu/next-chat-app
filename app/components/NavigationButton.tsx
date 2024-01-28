@@ -4,13 +4,14 @@ import Link from 'next/link';
 type Props = {
   iconComponent: React.ComponentType;
   route: string;
+  title: string;
 };
 
 export default function NavigationButton(props: Props) {
   const IconComponent = props.iconComponent;
   return (
-    <Link href={`/${props.route}` as Route}>
-      <div className="border border-primaryPink m-8 p-2 rounded-xl opacity-0 md:opacity-100 transition duration-500 hover:border-pink-400 statistics-logo">
+    <Link href={`/${props.route}` as Route} title={props.title}>
+      <div className="border border-primaryPink m-8 p-2 rounded-xl opacity-0 md:opacity-100 transition duration-500 hover:border-pink-400 statistics-logo max-w-16">
         <IconComponent />
       </div>
     </Link>

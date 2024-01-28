@@ -35,6 +35,7 @@ An open chat-room where everyone with an IP and a browser can post!
 - While there is mainly the chat interface the possibility of navigating to other pages becomes available on bigger screens - keeping the mobile interface simple and making options available when there is space
 - Responsive design: Screen resolution covered: Mobile to 1080p
 - Visual feedback: the messaging system is designed to allow only short messages. To keep the user informed there is a character count and additional alerts when the character limit is reached or exceeded
+- Although most of the app is styed using Tailwind I do use CSS in special cases like the animated statistics button and the D3 chart
 
 ### Todos
 

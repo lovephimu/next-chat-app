@@ -6,8 +6,6 @@ export type BrowserUsage = {
 };
 
 export function countUsers(messages: Message[]): BrowserUsage[] {
-  messages.forEach((message) => console.log('this is a message'));
-
   // 1. get the actual Names without Ips
 
   const count = messages.map((message) => {
@@ -28,7 +26,17 @@ export function countUsers(messages: Message[]): BrowserUsage[] {
   const result: BrowserUsage[] = Object.keys(countTotals).map((key) => {
     return { name: key, count: countTotals[key] };
   });
-  console.log(result);
+
+  if (result.length > 3) {
+    // Set desired length
+    const desiredLength = Math.min(3, result.length);
+
+    result.sort((a, b) => b.count - a.count);
+    // Create a new array with the desired length
+    const trimmedArray = result.slice(0, desiredLength);
+
+    return trimmedArray;
+  }
 
   return result;
 }

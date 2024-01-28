@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-pink: #ffddd2;
+}
+
 .dynamic-full-height {
   height: 100dvh;
 }
@@ -60,4 +64,13 @@
 
 .statistics-logo:hover #Bar3 rect {
   height: 90%;
+}
+
+.chart-container {
+  width: 100%; /* Full width of the parent element */
+  height: 100%; /* Full height of the parent element */
+}
+
+.chart-container rect {
+  color: var(--primary-pink);
 }
