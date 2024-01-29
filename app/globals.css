@@ -10,12 +10,12 @@
   height: 100dvh;
 }
 
-@media (min-height: 2000px) {
+@media (min-height: 1000px) {
   .wide-screen-height {
-    height: 35dvh !important;
+    height: 45dvh !important;
   }
   .wide-screen-height-logo {
-    height: 10dvh !important;
+    height: 15dvh !important;
   }
   .custom-border {
     border-width: 0 1px 8px 1px; /* top, right, bottom, left */
@@ -23,6 +23,27 @@
   }
 }
 
+@media (min-height: 1500px) {
+  .wide-screen-height {
+    height: 35dvh !important;
+  }
+  .wide-screen-height-logo {
+    height: 15dvh !important;
+  }
+  .custom-border {
+    border-width: 0 1px 8px 1px; /* top, right, bottom, left */
+    border-style: solid; /* Applies to all borders */
+  }
+}
+
+@media (min-height: 2000px) {
+  .wide-screen-height {
+    height: 25dvh !important;
+  }
+  .wide-screen-height-logo {
+    height: 10dvh !important;
+  }
+}
 .message-alert {
   top: 0px;
   transition: all 500ms ease;

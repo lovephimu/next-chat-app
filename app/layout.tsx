@@ -24,10 +24,10 @@ export default function RootLayout({
         className={`bg-primaryBlue ${inter.className} dynamic-full-height flex flex-col w-full items-center sm:p-10`}
       >
         <main className="h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-center items-center">
-          <section className="flex h-[20dvh] justify-center w-full sm:justify-between sm:max-w-2xl sm:border-primaryPink sm:border-t sm:border-x sm:rounded-t-2xl wide-screen-height-logo">
+          <section className="flex h-[15dvh] justify-center w-full sm:justify-between sm:max-w-2xl sm:border-primaryPink sm:border-t sm:border-x sm:rounded-t-2xl wide-screen-height-logo">
             <ChatLogo />
 
-            <div className="hidden sm:block">
+            <div className="">
               <NavigationButton
                 route={'visitors'}
                 iconComponent={StatisticsLogo}
@@ -36,7 +36,7 @@ export default function RootLayout({
             </div>
           </section>
 
-          <section className="w-full flex justify-center h-[80dvh] sm:h-[70dvh] wide-screen-height">
+          <section className="w-full flex justify-center h-[85dvh] sm:h-[70dvh] wide-screen-height">
             {children}
           </section>
         </main>

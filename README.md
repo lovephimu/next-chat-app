@@ -4,7 +4,7 @@ next-chat-app:
 
 # Chat-Schibidi
 
-### work-in-progress
+### Version 1.0
 
 An open chat-room where everyone with an IP and a browser can post!
 
@@ -19,6 +19,7 @@ An open chat-room where everyone with an IP and a browser can post!
 - [JEST](https://jestjs.io/)
 - REST API
 - TypeScript
+- Regex
 
 ### Technical Conception
 
@@ -26,7 +27,9 @@ An open chat-room where everyone with an IP and a browser can post!
 - A PostgreSQL database stores 5 messages - when limit is exceeded older messages get deleted until the limit is matched again
 - Frontend and database are communicating over restAPI
 - User can input messages of up to 280 characters (empty messages are not allowed)
-- When the API completes the database queries successfully a Pusher event is triggered
+- User input checks are both on the client- and server side, checking for valid character length and making sure the input isn't empty
+- Messages are stored using this endpoint: /api/messages
+- When the API completes the database queries successfully a Pusher event is triggered.
 - In the frontend a useEffect is subscribed to a Pusher channel
 - When receiving a signal from Pusher the frontend triggers a React rerender by updating the states with the newest messages
 
@@ -37,7 +40,7 @@ An open chat-room where everyone with an IP and a browser can post!
 <img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_screen.png" alt="Screen layout" width="200" height="auto">
 
 - The chat interface has a simplistic design in the spirit of old open chat rooms.
-- While there is mainly the chat interface the possibility of navigating to other pages becomes available on bigger screens - keeping the mobile interface simple and making options available when there is space
+- Navigation consists of two elements: the chat logo leading to the chat and a statistics icon leading to a D3 chart
 - Responsive design: Screen resolution covered: Mobile to 1080p
 
 <img src="https://github.com/lovephimu/next-chat-app/blob/main/public/ui_feedback1.png" alt="First notification" width="200" height="auto">
@@ -49,7 +52,7 @@ An open chat-room where everyone with an IP and a browser can post!
 
 ### Feature List
 
-- Character limit & maximum stored messages are controlled by the global variables "globalCharacterLimit" and "globalMessageLimit". By default they are set to 280 and 5.
+- Character limit & maximum stored messages are controlled by the global variables "globalCharacterLimit" and "globalMessageLimit". By default they are set to 280 and 5 (util/variables/globalVariables.ts).
 - Character limit is checked client and server side to ensure the correct format at all times
 - Links are being rendered as clickable links using a regex.
 
@@ -61,6 +64,7 @@ An open chat-room where everyone with an IP and a browser can post!
 
 - Add ent-to-end tests
 - Add default 404 page
+- Connect chart to websocket for live updates
 
 ### Problems
 
