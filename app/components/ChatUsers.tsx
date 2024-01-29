@@ -12,7 +12,6 @@ type Props = {
 export default function ChatUsers(props: Props) {
   // Sates
   const router = useRouter();
-  const [browsers, setBrowsers] = useState<BrowserUsage[]>([]);
 
   // Fetch functions to read and write Messages
   const containerRef = useRef<HTMLDivElement>(null);
@@ -81,7 +80,8 @@ export default function ChatUsers(props: Props) {
           .range([effectiveHeight, 0]);
 
         // Calculate tick values
-        const yAxisTicks = y.ticks().filter((tick) => Number.isInteger(tick));
+        const yAxisTickInterval = 1;
+        const yAxisTicks = d3.range(0, maxCount + 1, yAxisTickInterval);
 
         // Add X-axis
         svg
@@ -92,7 +92,9 @@ export default function ChatUsers(props: Props) {
         // Add Y-axis
         const yAxis = svg
           .append('g')
-          .call(d3.axisLeft(y).tickValues(yAxisTicks));
+          .call(
+            d3.axisLeft(y).tickValues(yAxisTicks).tickFormat(d3.format('d')),
+          ); // Format ticks as integers
 
         // yAxis
         //   .append('text')

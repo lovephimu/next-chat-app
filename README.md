@@ -49,6 +49,7 @@ An open chat-room where everyone with an IP and a browser can post!
 
 - Visual feedback: the messaging system is designed to allow only short messages. To keep the user informed there is a character count and additional alerts when the character limit is reached or exceeded
 - Although most of the app is styed using Tailwind I do use CSS in special cases like the animated statistics button and the D3 chart
+- All drawings and icons were made by myself using Affinity Designer
 
 ### Feature List
 
