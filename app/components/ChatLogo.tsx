@@ -9,7 +9,7 @@ export default function ChatLogo() {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 467 138"
         className={
-          'text-primaryPink hover:text-pink-400 p-4 sm:p-8 max-w-full max-h-[15dvh] sm:max-w-2xl transition-all duration-500 min-h-20'
+          'text-primaryPink hover:text-pink-400 p-4 sm:p-8 max-w-full max-h-[15dvh] sm:max-w-2xl transition-all duration-500 min-h-20 sm:min-h-24'
         }
         fill="currentColor"
       >
